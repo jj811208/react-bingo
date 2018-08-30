@@ -16,23 +16,53 @@ class Board extends Component{
 
 	constructor(){
 		super();
-
+		for(let i=1;i<=25;i++)
 		this.state ={
 				startnum: 1,
+				position11:'',
+				position12:'',
+				position13:'',
+				position14:'',
+				position15:'',
+				position21:'',
+				position22:'',
+				position23:'',
+				position24:'',
+				position25:'',
+				position31:'',
+				position32:'',
+				position33:'',
+				position34:'',
+				position35:'',
+				position41:'',
+				position42:'',
+				position43:'',
+				position44:'',
+				position45:'',
+				position51:'',
+				position52:'',
+				position53:'',
+				position54:'',
+				position55:'',
 		}
 	}
 
-	setNumber(){
-		this.setState({
-			num:this.state.num+1
-		});
+	setNumber(num){
+		if(this.state["position"+num]!='') return ;
+
+		let target = {};
+		target["position"+num] = this.state.startnum;
+		target["startnum"] = this.state.startnum+1;
+		console.log(num);
+		this.setState(target);
+
 	}
 
 	render() {
 		return(
 		<GameBoard>
-			{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25].map((num, index)=>{
-				return <Block setNumber={()=>this.setNumber()} key={index} num={this.state.num} />
+			{[11,12,13,14,15,21,22,23,24,25,31,32,33,34,35,41,42,43,44,45,51,52,53,54,55].map((num, index)=>{
+				return <Block setNumber={()=>this.setNumber(num)} key={"position"+num} num={this.state["position"+num]} />
 			})}
 		</GameBoard>
 		)
