@@ -6,17 +6,16 @@ const GameBoard = styled.div`
 	display: grid;
 	grid-template-rows: repeat(5, 20%) ;
 	grid-template-columns: repeat(5, 20%);
-	height: 250px;
-	width: 250px;
+	height: 400px;
+	width: 400px;
 	margin:auto;
-	border:1px solid #992222;
+	border:2px solid ${(props)=>{if(props.isControl===false) return '#999'; else return '#115599';} };
 `
 
 class Board extends Component{
 
 	constructor(){
 		super();
-		for(let i=1;i<=25;i++)
 		this.state ={
 				startnum: 1,
 				position11:'',
@@ -48,21 +47,27 @@ class Board extends Component{
 	}
 
 	setNumber(num){
-		if(this.state["position"+num]!='') return ;
+		if(this.state["position"+num]!==''||this.props.isControl===false) return ;
 
 		let target = {};
 		target["position"+num] = this.state.startnum;
 		target["startnum"] = this.state.startnum+1;
-		console.log(num);
 		this.setState(target);
+	}
 
+	componentDidUpdate(){
+		//遊戲開始
+		if(this.props.isStart===false&&this.state.startnum===26)
+		{
+			this.props.gamestart();
+		}
 	}
 
 	render() {
 		return(
-		<GameBoard>
+		<GameBoard isControl={this.props.isControl}>
 			{[11,12,13,14,15,21,22,23,24,25,31,32,33,34,35,41,42,43,44,45,51,52,53,54,55].map((num, index)=>{
-				return <Block setNumber={()=>this.setNumber(num)} key={"position"+num} num={this.state["position"+num]} />
+				return <Block setNumber={()=>this.setNumber(num)} key={"position"+num} num={this.state["position"+num]} isStart={this.props.isStart} isControl={this.props.isControl}  />
 			})}
 		</GameBoard>
 		)
