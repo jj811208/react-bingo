@@ -6,11 +6,11 @@ const GameBlock = styled.div`
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	border:2px solid ${(props)=>{if(props.isControl===false) return '#999'; else return '#115599';} };
+	border:2px solid #115599;
 	font-size:40px;
 	font-weight:600;
 	font-family:"微軟正黑體";
-	color:#ddd;
+	color:${(props)=>{if(props.isStart===false) return '#ddd'; else return '#000';}};;
 	background:#fff;
 `
 
@@ -18,7 +18,7 @@ const GameBlock = styled.div`
 class Block extends Component{
 
 	render() {
-		return <GameBlock onClick={this.props.setNumber} isControl={this.props.isControl}>{this.props.num}</GameBlock>
+		return <GameBlock onClick={this.props.setNumber} isControl={this.props.isControl} isStart={this.props.isStart}>{this.props.positionState.num}</GameBlock>
 	}
 }
 
