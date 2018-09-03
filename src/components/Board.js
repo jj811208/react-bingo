@@ -52,12 +52,25 @@ class Board extends Component{
 		if(this.state["positionState"+positionNum].num!==''||this.props.isControl===false) return ;
 
 		let target = {};
-		target["positionState"+positionNum] ={};
+		target["positionState"+positionNum] = this.state["positionState"+positionNum];
 		target["positionState"+positionNum].num = this.state.startNum;
 		target["startNum"] = this.state.startNum+1;
 		this.props.chanegeGameLine("下一個放置的數字："+target["startNum"]);
 		this.setState(target);
+		
+	}
+	
+	selectblock(positionNum){
+		//如果已經這一格已經有數字 或是 遊戲還不允許控制則不執行
+		if(this.state["positionState"+positionNum].isSelected===true||this.props.isControl===false) return ;
 
+		let target = {};
+		target["positionState"+positionNum] = this.state["positionState"+positionNum];
+		target["positionState"+positionNum].isSelected = true;
+		this.props.chanegeGameLine("你選擇了："+target["positionState"+positionNum].num);
+		this.setState(target);
+		
+		// for(this.p)q
 	}
 
 	componentDidUpdate(){
@@ -66,9 +79,18 @@ class Board extends Component{
 		{
 			this.props.gameStart();
 		}
-		else if(this.props.isStart===false&&this.state.startNum>1)
+		else if(this.props.isStart===true)
 		{
-			
+			let selectedBlocks=[]
+			for(let i=1;i<=5;i++)
+				for(let j=1;j<=5;j++)
+					if(this.state["positionState"+i+''+j].isSelected===true)
+						selectedBlocks.push(i+''+j);
+
+			console.log(selectedBlocks);
+						
+
+
 		}
 	}
 
@@ -76,7 +98,7 @@ class Board extends Component{
 		return(
 			<GameBoard isControl={this.props.isControl}>
 				{[11,12,13,14,15,21,22,23,24,25,31,32,33,34,35,41,42,43,44,45,51,52,53,54,55].map((positionNum)=>{
-					return <Block setNumber={()=>this.setNumber(positionNum)} key={positionNum} positionState={this.state["positionState"+positionNum]} isStart={this.props.isStart} isControl={this.props.isControl}  />
+					return <Block setNumber={()=>this.setNumber(positionNum)} selectblock={()=>this.selectblock(positionNum)} key={positionNum} positionState={this.state["positionState"+positionNum]} isStart={this.props.isStart} isControl={this.props.isControl}  />
 				})}
 			</GameBoard>
 		)

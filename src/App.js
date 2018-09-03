@@ -25,7 +25,6 @@ class App extends Component {
   changeGameLine(gameLine){
     let gameLineObj = {};
     gameLineObj.gameLine=gameLine;
-    console.log(gameLineObj);
     this.setState(gameLineObj);
   }
 
