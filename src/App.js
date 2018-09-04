@@ -12,6 +12,7 @@ class App extends Component {
         isStart: false,
         isControl: false,
         gameLine:"歡迎來到賓果遊戲",
+        countLine:"連線數：0",
 		}
   }
   
@@ -26,6 +27,12 @@ class App extends Component {
     let gameLineObj = {};
     gameLineObj.gameLine=gameLine;
     this.setState(gameLineObj);
+  }
+
+  changeCountLine(count){
+    let countLineObj = {};
+    countLineObj.countLine="連線數："+count;
+    this.setState(countLineObj);
   }
 
   changeGameControlState(bool){
@@ -46,7 +53,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <GameLineState gameLine={this.state.gameLine} />
-        <Board gameStart={()=>this.gameStart()} chanegeGameLine={(gameLine)=>this.changeGameLine(gameLine)} changeGameControlState={()=>this.changeGameControlState()} isStart={this.state.isStart} isControl={this.state.isControl} />
+        <Board gameStart={()=>this.gameStart()} chanegeGameLine={(gameLine)=>this.changeGameLine(gameLine)} chanegeCountLine={(count)=>this.changeCountLine(count)} changeGameControlState={()=>this.changeGameControlState()} isStart={this.state.isStart} isControl={this.state.isControl} />
+        <GameLineState gameLine={this.state.countLine} />
       </div>
     );
   }

@@ -21,7 +21,7 @@ const GameBlock = styled.div`
 				return '#992222';
 		}
 	}};
-	background:#fff;
+	background:${(props)=>{return ((props.positionState.isLink===true)?'#5599dd':'#fff')}};
 `
 
 

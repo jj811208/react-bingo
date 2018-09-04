@@ -6,7 +6,7 @@ const GameLine = styled.div`
 	align-items:center;
 	justify-content:center;
 	margin-bottom:15px;
-	font-size:55px;
+	font-size:45px;
 	font-weight:600;
 	font-family:"微軟正黑體";
 `
