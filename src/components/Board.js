@@ -9,7 +9,7 @@ const GameBoard = styled.div`
 	height: 400px;
 	width: 400px;
 	margin:auto;
-	/* border:2px solid #115599; */
+	border:2px solid #115599;
 	opacity: ${(props)=>{if(props.isControl===false) return '0.2'; else return '1';}};
 `
 
